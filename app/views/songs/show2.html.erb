@@ -1,0 +1,15 @@
+<a style="float:right; margin-right:20px;" href="/songs/">Dashboard<a>
+
+  <h3>Others who added <%= @song.artist %> - <%= @song.title %></h3>
+</br>
+  <table style="border-collapse: collapse;">
+  <tr style="background-color: #dddddd">
+  <th style="padding:8px;border:1px solid black;text-align: left">Name</th>
+  <th style="padding:8px;border:1px solid black;text-align: left">Times added</th>
+  </tr>
+  <tbody>
+  <tr><% @users.each do |u| %> <% if u.playlists.count > 0 %>
+    <td style="padding:8px;border:1px solid black;text-align: left"><a href="/users/<%= u.id %>"><%= u.first_name %><%= u.last_name %></a></td>
+    <td style="padding:8px;border:1px solid black;text-align: left"><%= u.playlists.count %></td>
+  </tr><% end %><% end %>
+</table>

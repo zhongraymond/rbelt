@@ -1,0 +1,45 @@
+<h2>Welcome, <%= @user.first_name %> <%= @user.last_name %>!</h2>
+</br>
+  All the songs in our hub:
+</br>
+  <table style="border-collapse: collapse;">
+  <tr style="background-color: #dddddd">
+  <th style="padding:8px;border:1px solid black;text-align: left">Artist</th>
+  <th style="padding:8px;border:1px solid black;text-align: left">Title</th>
+  <th style="padding:8px;border:1px solid black;text-align: left">No. of Times Song Has Been Added</th>
+  <th style="padding:8px;border:1px solid black;text-align: left">Add to Playlist</th>
+  </tr>
+  <tbody><% @songs.each do |song| %>
+  <tr>
+    <td style="padding:8px;border:1px solid black;text-align: left"><%= song.artist %></td>
+    <td style="padding:8px;border:1px solid black;text-align: left"><a href="/songs/<%= song.id %>"><%= song.title %></a></td>
+    <td style="padding:8px;border:1px solid black;text-align: left"><%= song.playlists.count %></td>
+    <td style="padding:8px;border:1px solid black;text-align: left">
+        <a href="/add/<%=song.id%>" data-method = "post">Add</a>
+        </td>
+  </tr>  <% end %>
+</table>
+</br>
+  <form style="display: inline-block; padding: 10px;" action="/songs/" method="post">
+  Add song
+  <input name="authenticity_token" value="<%= form_authenticity_token %>" type="hidden">
+  <table>
+
+    <tr>
+      <td style="text-align: left"><label for="song[title]">Title:</label></td>
+      <td style="text-align: left"><input type="text" name="song[title]"/></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: left"><label for="song[artist]">Artist:</label></td>
+      <td style="text-align: left"><input type="text" name="song[artist]"/></td>
+    </tr>
+
+    <tr>
+        <input name="song[user_id]" value="<%=@user.id%>" type="hidden">
+      <td style="text-align: left"></td>
+      <td style="text-align: right"><input type="submit" value="Add song" /></td>
+    </tr>
+
+  </table>
+  </form>

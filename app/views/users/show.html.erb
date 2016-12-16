@@ -1,0 +1,17 @@
+<a style="float:right; margin-right:20px;" href="/songs/">Dashboard<a>
+
+  <h3><%= @user.first_name %> <%= @user.last_name %>'s Playlist</h3>
+</br>
+  <table style="border-collapse: collapse;">
+  <tr style="background-color: #dddddd">
+  <th style="padding:8px;border:1px solid black;text-align: left">Artist</th>
+    <th style="padding:8px;border:1px solid black;text-align: left">Title</th>
+  <th style="padding:8px;border:1px solid black;text-align: left">Times added</th>
+  </tr>
+  <tbody><% @songs.each do |song| %>
+  <tr>
+    <td style="padding:8px;border:1px solid black;text-align: left"><%= song.artist %></td>
+    <td style="padding:8px;border:1px solid black;text-align: left"><%= song.title %></td>
+    <td style="padding:8px;border:1px solid black;text-align: left"><%= song.playlists.count%></td>
+  </tr><% end %>
+</table>
